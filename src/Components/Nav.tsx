@@ -1,27 +1,80 @@
-import React from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    NavbarText
+  } from 'reactstrap';
 
 import Rando from '../Pages/RandoVid'
 import Home from '../Pages/Home'
+import MainVid from '../Pages/MainVideoPlayer'
 
-export default function Nav() {
+export default function NavBra() {
+
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggle = () => setIsOpen(!isOpen);
+
+
+
     return (
       <Router>
         <div>
-            
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/rando">Random Thot</Link>
-            </li>
-          </ul>
+    <div>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand href="/">reactstrap</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              <NavLink href="/">Home</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/rando">Random Thot</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/mainVid">Test</NavLink>
+            </NavItem>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                Options
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem>
+                  Option 1
+                </DropdownItem>
+                <DropdownItem>
+                  Option 2
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>
+                  Reset
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Nav>
+          <NavbarText>Simple Text</NavbarText>
+        </Collapse>
+      </Navbar>
+    </div>
+              <Link to="/rando"></Link>
+
   
           <hr />
   
@@ -38,6 +91,9 @@ export default function Nav() {
             </Route>
             <Route path="/Rando">
               <Rando />
+            </Route>
+            <Route path="/mainVid">
+              <MainVid/>
             </Route>
           </Switch>
         </div>
