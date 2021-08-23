@@ -11,7 +11,7 @@ function RandoVid() {
   
   let ok = [] as any
   const data = async () => {
-    fetchy(globURLTest).then(async (data) => {
+    fetchy(globURLTest+'dirList').then(async (data) => {
       // console.log(data.userTrunk);
       let derta = await data
       console.log(derta)
