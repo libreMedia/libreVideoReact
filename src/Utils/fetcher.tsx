@@ -1,4 +1,4 @@
-const fetchy = async (address) => {
+const fetchy = async (address:string) => {
     let res = await fetch(address);
     let data = await res.json();
     return data;

@@ -17,7 +17,8 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText
+    NavbarText,
+    Container
   } from 'reactstrap';
 
 import Rando from '../Pages/RandoVid'
@@ -35,10 +36,11 @@ export default function NavBra() {
 
     return (
       <Router>
-        <div>
     <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
+        <Container className='nav-container' fluid={true}>
+      <Navbar color="prim" expand="md">
+        <Container className='nav-container-container' >
+        <NavbarBrand href="/"><img id="pics" src="https://i.ibb.co/pbC7mhp/libre-Vid-Trans.png" height="75px" width="150px" alt='Libre Video logo ' /></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -46,10 +48,7 @@ export default function NavBra() {
               <NavLink href="/">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/rando">Random Thot</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/mainVid">Test</NavLink>
+              <NavLink href="/rando">Random Vid</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
@@ -71,8 +70,9 @@ export default function NavBra() {
           </Nav>
           <NavbarText>Simple Text</NavbarText>
         </Collapse>
+    </Container>
       </Navbar>
-    </div>
+    </Container>
               <Link to="/rando"></Link>
 
   
