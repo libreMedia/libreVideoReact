@@ -48,10 +48,7 @@ export default function NavBra() {
               <NavLink href="/">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/rando">Random Thot</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/mainVid">Test</NavLink>
+              <NavLink href="/rando">Random Vid</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>

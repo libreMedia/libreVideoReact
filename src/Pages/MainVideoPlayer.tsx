@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import ReactPlayer from 'react-player/lazy'
 import { Jumbotron, Button, Container } from 'reactstrap';
-import globURLTest from "../Utils/urlSwitcher";
+import globURL from "../Utils/urlSwitcher";
 
 
 
@@ -25,7 +25,7 @@ export default function MainVid() {
         <Container>
             <div>
 
-                <ReactPlayer url={globURLTest + 'static/' + stateFile} loop={true} controls={true} />
+                <ReactPlayer url={globURL + 'vids/' + stateFile} loop={true} controls={true} />
             </div>
         </Container>
     )
