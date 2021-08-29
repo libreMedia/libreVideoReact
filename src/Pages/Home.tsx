@@ -75,6 +75,7 @@ const Home = () => {
     let RandoNumInArr = Math.ceil(Math.random() * allRoutes.length)
     let rando = allRoutes[RandoNumInArr];
     localStorage.setItem('fileChosen', rando['VidRoute']);
+    localStorage.setItem('mainVidName', rando['VidName']);
     history.push("/mainVid");
   }
   const setLinkInStorage = (e: any) => {

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, Suspense, useRef } from "react";
 import ReactPlayer from 'react-player/lazy'
+import { useHistory } from "react-router-dom";
+
 import { Button, Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import globURL from "../Utils/urlSwitcher";
 import Ico from "../Utils/Ico";
@@ -7,21 +9,46 @@ import Ico from "../Utils/Ico";
 
 
 export default function MainVid() {
+    const history = useHistory();
     const [stateFile, setChosenFile] = useState<string>();
     const [pBRate, setPBRate] = useState<number>(1);
     const [vol, setVol] = useState<number>(1);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [allRoutes, setAllRoutes] = useState([]);
+    const [mainVidTitle, setMainVidTitle] = useState('');
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
     const player = useRef<ReactPlayer>(null)
 
+    let randoNext = ()=>{
+        var existingRoutes = localStorage.getItem("allRoutes");
+        if(existingRoutes){
+          setAllRoutes(JSON.parse(existingRoutes))
+        }else{
+            console.log('borklyfe')
+        }
+
+    }
+
     const thing = () => {
+        randoNext()
+        let chosenTitle = localStorage.getItem('mainVidName');
         const chosenFile = localStorage.getItem('fileChosen');
         console.log(chosenFile)
         setChosenFile(chosenFile as string)
+        setMainVidTitle(chosenTitle as string)
         return chosenFile
     }
+
+    const setRando = (e: any) => {
+        console.log(allRoutes)
+        let RandoNumInArr = Math.ceil(Math.random() * allRoutes.length)
+        let rando = allRoutes[RandoNumInArr];
+        localStorage.setItem('fileChosen', rando['VidRoute']);
+        localStorage.setItem('mainVidName', rando['VidName']);
+        window.location.reload()
+      }
 
     let volLoop = (e: any) => {
         console.log(vol)
@@ -95,21 +122,30 @@ export default function MainVid() {
     let onSeekMouseUp = (e: any) => {
         console.log('onSeek', e);
     }
-
-
+    
+    
+    
     useEffect(() => {
         thing()
     }, []);
-
-
+    
+    
     return (
         <Container >
-            <Container className='d-flex justify-content-center pt-5'>
+            <Container >
+                <Container >
+
+                <Row className='mainVidTitleRow shad pt-5'>
+                    <Col>
+                {mainVidTitle}
+                    </Col>
+                </Row>
+                </Container>
+                <Container className='d-flex justify-content-center'>
                 <Row>
 
                     <ReactPlayer
                         url={globURL + 'vids/' + stateFile}
-                        
                         playing={true}
                         ref={player}
                         forceAudio={true}
@@ -122,18 +158,20 @@ export default function MainVid() {
                         volume={vol}
                     />
                 </Row>
+                </Container>
+            <Button color="prim" className='randoButt shad' onClick={setRando}>{'Rando Vid >|'}</Button>
             </Container>
             <Container>
                 <Row>
                     <Col>
-                        <Button color='prim' className='controlButt' onClick={begin}>{'|<5'}</Button>
+                        <Button color='prim' className='controlButt shad' onClick={begin}>{'|<5'}</Button>
                     </Col>
                     <Col>
-                        <Button color='prim' className='controlButt' onClick={backSkip}>{'<<30'}</Button>
+                        <Button color='prim' className='controlButt shad' onClick={backSkip}>{'<<30'}</Button>
                     </Col>
                     <Col>
                         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                            <DropdownToggle className='controlButt' caret color='prim'>
+                            <DropdownToggle className='controlButt shad' caret color='prim'>
                                 xSpeed
                             </DropdownToggle>
                             <DropdownMenu className='speedDrop'>
@@ -150,15 +188,17 @@ export default function MainVid() {
                         </Dropdown>
                     </Col>
                     <Col>
-                        <Button color='prim' className='controlButt' onClick={forSkip}>{'30>>'}</Button>
+                        <Button color='prim' className='controlButt shad' onClick={forSkip}>{'30>>'}</Button>
                     </Col>
                     <Col>
-                        <Button color='prim' className='controlButt' onClick={end}>{'5>|'}</Button>
+                        <Button color='prim' className='controlButt shad' onClick={end}>{'5>|'}</Button>
                     </Col>
                     <Col>
-                        <Button className='controlButt' color='prim' onClick={volLoop}>
+                        <Button className='controlButt shad' color='prim' onClick={volLoop}>
                             <Ico />
                         </Button>
+                    </Col>
+                    <Col>
                     </Col>
                 </Row>
             </Container>

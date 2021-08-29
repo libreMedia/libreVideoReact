@@ -143,7 +143,12 @@ $sec: #F5E534;
   height: 5em;
 }
 
-
+.mainVidTitleRow{
+  font-size: 3em;
+  background-color: $prim;
+  color: $sec;
+  font-family: Blockletter;
+}
 
 //####################################
 //######### vidControlRow ############
