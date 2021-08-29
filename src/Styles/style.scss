@@ -142,3 +142,25 @@ $sec: #F5E534;
   width: 15em;
   height: 5em;
 }
+
+
+
+//####################################
+//######### vidControlRow ############
+//####################################
+
+
+.speedDropHead{
+  color: $sec;
+  font-family: Blockletter;
+  font-size: 1.5em;
+}
+.speedDrop{
+  background-color: $prim;
+  color: $sec;
+  font-family: Blockletter;
+}
+.controlButt{
+  color: $sec;
+  font-family: Blockletter;
+}

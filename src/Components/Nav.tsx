@@ -20,8 +20,6 @@ import {
     NavbarText,
     Container
   } from 'reactstrap';
-
-import Rando from '../Pages/RandoVid'
 import Home from '../Pages/Home'
 import MainVid from '../Pages/MainVideoPlayer'
 
@@ -80,9 +78,6 @@ export default function NavBra() {
           <Switch>
             <Route exact path="/">
               <Home />
-            </Route>
-            <Route path="/Rando">
-              <Rando />
             </Route>
             <Route path="/mainVid">
               <MainVid/>
