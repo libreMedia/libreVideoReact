@@ -71,7 +71,7 @@ const Home = () => {
 
   let gu = globURL.slice(0, -1)
   return (
-    <Container className='pt-5' fluid>
+    <Container className='pt-5'>
       <Jumbotron className='jumboTron' fluid>
         <h1 className="display-3 jumboTitle">Libre Video</h1>
         <p className="lead">Enjoy the freedom of your own videos</p>
@@ -86,14 +86,17 @@ const Home = () => {
         <Container fluid>
       <Row className='align-items-center'>
       {allRoutes.map(vid => (
-            <Col lg={{ size:4}} sm="12" className='pt-3 pb-3'>
+            <Col lg={{ size:6}} sm="12" className='pt-3 pb-3'>
         <Card  className="shad">
             <CardImg top height="300px" id={`${vid['VidRoute']}`} className='card-img' src={`${gu}${vid['ScreenShotRoute']}`} onClick={setLinkInStorage} onMouseEnter={ninja} onMouseLeave={ninjaVanish} alt="Card image cap" />
-            <CardBody className="vidCardBod ninjaVanish" onMouseEnter={ninjaD} onMouseLeave={ninjaVanishD}>
+            <CardBody className="vidCardBod  ninjaVanish" onMouseEnter={ninjaD} onMouseLeave={ninjaVanishD}>
               <CardTitle tag="h5">{vid['VidName']}</CardTitle>
+              {{/*TODO
+              parse/regex the titles and remove odd chard between () or [] and replace . with whitespace
+              */}},
               <a href={`${gu}${vid['ScreenShotRoute']}`}><CardSubtitle tag="h6" className="mb-2 text-muted">screen-shot link</CardSubtitle></a>
               <CardText>Watch the show already...</CardText>
-              <Button className='watchButt' color='prim' id={`${vid['VidRoute']}`} onClick={setLinkInStorage}>Watch</Button> 
+              <Button className='watchButt' color='sec' id={`${vid['VidRoute']}`} onClick={setLinkInStorage}>Watch</Button> 
             </CardBody>
           </Card>
         </Col>

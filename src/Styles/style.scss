@@ -2,7 +2,7 @@
 @import "bootstrap/scss/variables";
 
 $theme-colors: (
-  secondary: pink,
+  sec: #F5E534,
   secondaryGrad: #323880 ,
   prim: #22256A,
   primaryGrad: #A53B6B,
@@ -46,7 +46,6 @@ $sec: #F5E534;
   position: absolute;
   opacity: 0;
   display: none;
-  opacity: 0;
   -webkit-transition: width 2s ease, height 2s ease;
   -moz-transition: width 2s ease, height 2s ease;
   -o-transition: width 2s ease, height 2s ease;
@@ -54,18 +53,49 @@ $sec: #F5E534;
 }
 
 .ninja{
+  position: fixed;
+  top: 0;
+  right: 0%;
+  height: 100%;
+  width: 17vw;
   z-index: 99;
   background-color: honeydew;
-  width: 100%;
-  position: absolute;
-  transform: translate(0, 100%);
   box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
 }
 
+.vidCardBod{
+  color: $sec;
+  background-color: $prim;
+  hyphens: auto;
+  flex-direction: column;
+  display: flex;
+  text-align: center;
+  align-items:center; 
+  justify-content: center;
+}
+.card-title{
+  font-family: Blockletter;
+  font-size: 2em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+
+
 
 .txt-cen{
   text-align: center;
+}
+
+.watchButt{
+  color: $prim;
+  font-family: Blockletter;
+  width: 10em;
+  height: 3em;
 }
 
 .shad{
@@ -111,11 +141,4 @@ $sec: #F5E534;
   font-family: Blockletter;
   width: 15em;
   height: 5em;
-}
-
-.watchButt{
-  color: $sec;
-  font-family: Blockletter;
-  width: 10em;
-  height: 3em;
 }
