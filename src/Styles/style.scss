@@ -139,8 +139,18 @@ $sec: #F5E534;
 .randoButt{
   color: $sec;
   font-family: Blockletter;
-  width: 15em;
-  height: 5em;
+  width: 10em;
+  height: 3em;
+}
+
+.ppButt{
+  fill:$sec;
+  transition:400ms;
+  stroke-width: 7;
+}
+.ppButt:hover{
+  transition:400ms;
+  fill:white;
 }
 
 .mainVidTitleRow{
