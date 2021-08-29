@@ -47,12 +47,9 @@ export default function NavBra() {
             <NavItem>
               <NavLink href="/">Home</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="/rando">Random Vid</NavLink>
-            </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Options
+                Nothing ATM
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>
@@ -68,16 +65,11 @@ export default function NavBra() {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
         </Collapse>
     </Container>
       </Navbar>
     </Container>
               <Link to="/rando"></Link>
-
-  
-          <hr />
-  
           {/*
             A <Switch> looks through all its children <Route>
             elements and renders the first one whose path

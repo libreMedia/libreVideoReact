@@ -31,43 +31,75 @@ const Home = () => {
 
   }, []);
 
+  let ninja = (e:any)=>{
+    let okay = e.target.nextElementSibling.classList 
+    okay.remove("ninjaVanish")
+    okay.add("ninja")
+  }
+  let ninjaVanish = (e:any)=>{
+    console.log('benixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+    let okay = e.target.nextElementSibling.classList 
+    okay.remove("ninja")
+    okay.add("ninjaVanish")
+  }
+  let ninjaD = (e:any)=>{
+    let okay = e.target.classList 
+    okay.remove("ninjaVanish")
+    okay.add("ninja")
+  }
+  let ninjaVanishD = (e:any)=>{
+    console.log('benixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+    let okay = e.target.classList 
+    okay.remove("ninja")
+    okay.add("ninjaVanish")
+  }
+
+  const setRando = (e: any) => {
+    console.log(allRoutes)
+    let RandoNumInArr = Math.ceil(Math.random() * allRoutes.length)
+    let  rando = allRoutes[RandoNumInArr];
+    localStorage.setItem('fileChosen', rando['VidRoute']);
+    history.push("/rando");
+  }
   const setLinkInStorage = (e: any) => {
     let okay = e.target.id
     console.log(okay)
     localStorage.setItem('fileChosen', okay);
     history.push("/mainVid");
   }
+
+
   let gu = globURL.slice(0, -1)
   return (
-    <Container>
-      <Jumbotron>
-        <h1 className="display-3">Libre Video</h1>
+    <Container className='pt-5' fluid>
+      <Jumbotron className='jumboTron' fluid>
+        <h1 className="display-3 jumboTitle">Libre Video</h1>
         <p className="lead">Enjoy the freedom of your own videos</p>
         <hr className="my-2" />
         <p>Don't tread on me </p>
         <p>RareHoss.jpg</p>
-        <p className="lead">
-          <Button color="prim">Learn More</Button>
-        </p>
       </Jumbotron>
-      <Row>
+        <p className="lead">
+          <Button color="prim" className='randoButt mt-5' onClick={setRando}>Play Rando Vid</Button>
+        </p>
+        <hr className="my-2" />
+        <Container fluid>
+      <Row className='align-items-center'>
       {allRoutes.map(vid => (
-            <Col lg="6" sm="12" className="p-5">
-        <Card>
-            <CardImg top width="100%" src={`${gu}${vid['ScreenShotRoute']}`} alt="Card image cap" />
-            <CardBody>
+            <Col lg={{ size:4}} sm="12" className='pt-3 pb-3'>
+        <Card  className="shad">
+            <CardImg top height="300px" id={`${vid['VidRoute']}`} className='card-img' src={`${gu}${vid['ScreenShotRoute']}`} onClick={setLinkInStorage} onMouseEnter={ninja} onMouseLeave={ninjaVanish} alt="Card image cap" />
+            <CardBody className="vidCardBod ninjaVanish" onMouseEnter={ninjaD} onMouseLeave={ninjaVanishD}>
               <CardTitle tag="h5">{vid['VidName']}</CardTitle>
               <a href={`${gu}${vid['ScreenShotRoute']}`}><CardSubtitle tag="h6" className="mb-2 text-muted">screen-shot link</CardSubtitle></a>
               <CardText>Watch the show already...</CardText>
-              <Button id={`${vid['VidRoute']}`} onClick={setLinkInStorage}>Watch</Button> 
+              <Button className='watchButt' color='prim' id={`${vid['VidRoute']}`} onClick={setLinkInStorage}>Watch</Button> 
             </CardBody>
           </Card>
         </Col>
         ))}
-
-
-
       </Row>
+      </Container>
     </Container>
   );
 };

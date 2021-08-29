@@ -22,11 +22,8 @@ export default function MainVid() {
 
 
     return (
-        <Container>
-            <div>
-
+        <Container className='d-flex justify-content-center pt-5'>
                 <ReactPlayer url={globURL + 'vids/' + stateFile} loop={true} controls={true} />
-            </div>
         </Container>
     )
 }
