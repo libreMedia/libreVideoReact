@@ -1,7 +1,11 @@
 import React, { useState, useEffect, Suspense } from "react";
-import { Jumbotron, Button, Container, Row, Col,  Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle,  } from 'reactstrap';
+import {
+  Jumbotron, Button, Container, Row, Col, Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle,
+} from 'reactstrap';
 import { useHistory } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import globURL from "../Utils/urlSwitcher";
 import fetchy from "../Utils/fetcher";
@@ -13,15 +17,21 @@ const Home = () => {
 
   let ok = [] as any
   const data = async () => {
-    fetchy(globURL + 'dirList').then(async (data) => {
-      // console.log(data.userTrunk);
-      let derta = await data
-      // console.log(derta)
-      derta.forEach((el: string) => {
-        ok.push(el)
+    var existingRoutes = localStorage.getItem("allRoutes");
+    if(existingRoutes){
+      setAllRoutes(JSON.parse(existingRoutes))
+    }else{
+      fetchy(globURL + 'dirList').then(async (data) => {
+        // console.log(data.userTrunk);
+        let derta = await data
+        // console.log(derta)
+        derta.forEach((el: string) => {
+          ok.push(el)
+        });
+        localStorage.setItem("allRoutes", JSON.stringify(ok));
+        setAllRoutes(ok)
       });
-      setAllRoutes(ok)
-    });
+    }
   };
 
 
@@ -31,25 +41,31 @@ const Home = () => {
 
   }, []);
 
-  let ninja = (e:any)=>{
-    let okay = e.target.nextElementSibling.classList 
+  let ninja = (e: any) => {
+    let okay = e.target.parentElement.parentElement.querySelector('.vidCardBod').classList
+    if(okay !== null) {
+    console.log(okay)
     okay.remove("ninjaVanish")
     okay.add("ninja")
+    }else{
+      console.log('nulllsz')
+    }
   }
-  let ninjaVanish = (e:any)=>{
+  let ninjaVanish = (e: any) => {
     console.log('benixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-    let okay = e.target.nextElementSibling.classList 
+    let okay = e.target.parentElement.parentElement.querySelector('.vidCardBod').classList
+    console.log(okay)
     okay.remove("ninja")
     okay.add("ninjaVanish")
   }
-  let ninjaD = (e:any)=>{
-    let okay = e.target.classList 
+  let ninjaD = (e: any) => {
+    let okay = e.target.classList
     okay.remove("ninjaVanish")
     okay.add("ninja")
   }
-  let ninjaVanishD = (e:any)=>{
+  let ninjaVanishD = (e: any) => {
     console.log('benixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-    let okay = e.target.classList 
+    let okay = e.target.classList
     okay.remove("ninja")
     okay.add("ninjaVanish")
   }
@@ -57,9 +73,10 @@ const Home = () => {
   const setRando = (e: any) => {
     console.log(allRoutes)
     let RandoNumInArr = Math.ceil(Math.random() * allRoutes.length)
-    let  rando = allRoutes[RandoNumInArr];
+    let rando = allRoutes[RandoNumInArr];
     localStorage.setItem('fileChosen', rando['VidRoute']);
-    history.push("/rando");
+    localStorage.setItem('mainVidName', rando['VidName']);
+    history.push("/mainVid");
   }
   const setLinkInStorage = (e: any) => {
     let okay = e.target.id
@@ -79,29 +96,45 @@ const Home = () => {
         <p>Don't tread on me </p>
         <p>RareHoss.jpg</p>
       </Jumbotron>
-        <p className="lead">
-          <Button color="prim" className='randoButt mt-5' onClick={setRando}>Play Rando Vid</Button>
-        </p>
-        <hr className="my-2" />
-        <Container fluid>
-      <Row className='align-items-center'>
-      {allRoutes.map(vid => (
-            <Col lg={{ size:6}} sm="12" className='pt-3 pb-3'>
-        <Card  className="shad">
-            <CardImg top height="300px" id={`${vid['VidRoute']}`} className='card-img' src={`${gu}${vid['ScreenShotRoute']}`} onClick={setLinkInStorage} onMouseEnter={ninja} onMouseLeave={ninjaVanish} alt="Card image cap" />
-            <CardBody className="vidCardBod  ninjaVanish" onMouseEnter={ninjaD} onMouseLeave={ninjaVanishD}>
-              <CardTitle tag="h5">{vid['VidName']}</CardTitle>
-              {{/*TODO
+      <p className="lead">
+        <Button color="prim" className='randoButt mt-5' onClick={setRando}>Play Rando Vid</Button>
+      </p>
+      <hr className="my-2" />
+      <Container fluid>
+        <Row className='align-items-center'>
+          {allRoutes.map(vid => (
+            <Col lg={{ size: 6 }} sm="12" className='pt-3 pb-3'>
+              <Card className="shad">
+                {/* <CardImg top height="300px" id={`${vid['VidRoute']}`} className='card-img' src={`${gu}${vid['ScreenShotRoute']}`} onClick={setLinkInStorage} onMouseEnter={ninja} onMouseLeave={ninjaVanish} alt="Card image cap" /> */}
+                <LazyLoadImage
+                  onClick={setLinkInStorage}
+                  onMouseEnter={ninja}
+                  onMouseLeave={ninjaVanish}
+                  id={`${vid['VidRoute']}`}
+                  className='card-img'
+                  // placeholder={baser}
+                  placeholderSrc={`${gu}${vid['ScreenShotRoute']}`}
+                  alt=""
+                  threshold={1}
+                  effect="blur"
+                  delayMethod="debounce"
+                  src={`${gu}${vid['ScreenShotRoute']}`} // use normal <img> attributes as props
+                  width="100%"
+                  height="300px"
+                />
+                <CardBody className="vidCardBod  ninjaVanish" onMouseEnter={ninjaD} onMouseLeave={ninjaVanishD}>
+                  <CardTitle tag="h5">{vid['VidName']}</CardTitle>
+                  {/*TODO
               parse/regex the titles and remove odd chard between () or [] and replace . with whitespace
-              */}},
-              <a href={`${gu}${vid['ScreenShotRoute']}`}><CardSubtitle tag="h6" className="mb-2 text-muted">screen-shot link</CardSubtitle></a>
-              <CardText>Watch the show already...</CardText>
-              <Button className='watchButt' color='sec' id={`${vid['VidRoute']}`} onClick={setLinkInStorage}>Watch</Button> 
-            </CardBody>
-          </Card>
-        </Col>
-        ))}
-      </Row>
+              */},
+                  <a href={`${gu}${vid['ScreenShotRoute']}`}><CardSubtitle tag="h6" className="mb-2 text-muted">screen-shot link</CardSubtitle></a>
+                  <CardText>Watch the show already...</CardText>
+                  <Button className='watchButt' color='sec' id={`${vid['VidRoute']}`} onClick={setLinkInStorage}>Watch</Button>
+                </CardBody>
+              </Card>
+            </Col>
+          ))}
+        </Row>
       </Container>
     </Container>
   );
