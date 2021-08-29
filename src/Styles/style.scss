@@ -2,7 +2,7 @@
 @import "bootstrap/scss/variables";
 
 $theme-colors: (
-  secondary: pink,
+  sec: #F5E534,
   secondaryGrad: #323880 ,
   prim: #22256A,
   primaryGrad: #A53B6B,
@@ -45,25 +45,67 @@ $sec: #F5E534;
   visibility: hidden;
   position: absolute;
   opacity: 0;
-  
-  transition: visibility 0s linear 500ms, opacity 500ms;
+  display: none;
+  -webkit-transition: width 2s ease, height 2s ease;
+  -moz-transition: width 2s ease, height 2s ease;
+  -o-transition: width 2s ease, height 2s ease;
+  transition: width 2s ease, height 2s ease;
 }
+
 .ninja{
-  visibility: visible;
-  opacity: 1;
-  transition: visibility 0s linear 0s, opacity 500ms;
+  position: fixed;
+  top: 0;
+  right: 0%;
+  height: 100%;
+  width: 17vw;
+  z-index: 99;
+  background-color: honeydew;
   box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
 }
 
+.vidCardBod{
+  color: $sec;
+  background-color: $prim;
+  hyphens: auto;
+  flex-direction: column;
+  display: flex;
+  text-align: center;
+  align-items:center; 
+  justify-content: center;
+}
+.card-title{
+  font-family: Blockletter;
+  font-size: 2em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+
+
+
 .txt-cen{
   text-align: center;
+}
+
+.watchButt{
+  color: $prim;
+  font-family: Blockletter;
+  width: 10em;
+  height: 3em;
 }
 
 .shad{
   
   box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
+}
+
+.App{
+  background-color: lightgrey;
 }
 
 
@@ -81,4 +123,22 @@ $sec: #F5E534;
 }
 .nav-container-container a:hover{
   color:$sec;
+}
+
+.jumboTron{
+  background-color: $prim;
+  color: $sec;
+}
+
+.jumboTitle{
+  color: $sec;
+  font-weight: bold;
+  font-family: Blockletter;
+}
+
+.randoButt{
+  color: $sec;
+  font-family: Blockletter;
+  width: 15em;
+  height: 5em;
 }
