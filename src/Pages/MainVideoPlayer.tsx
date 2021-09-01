@@ -1,19 +1,22 @@
 import React, { useState, useEffect, Suspense, useRef } from "react";
 import ReactPlayer from 'react-player/lazy'
-import { useHistory } from "react-router-dom";
 
-import { Button, Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Button, Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Progress } from 'reactstrap';
 import globURL from "../Utils/urlSwitcher";
 import Ico from "../Utils/Ico";
+import Playbutt from "../Utils/PlayButt";
+import { setInterval } from "timers";
 
-
+let yellowCog = "http://www.clker.com/cliparts/4/5/9/D/X/I/gear-orange-cog-hi.png"
 
 export default function MainVid() {
-    const history = useHistory();
     const [stateFile, setChosenFile] = useState<string>();
     const [pBRate, setPBRate] = useState<number>(1);
+    const [currentTime, setCurrentTime] = useState<number>(1);
     const [vol, setVol] = useState<number>(1);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [playPause, setPlayPause] = useState(true);
+    const [controls, setControls] = useState(false);
     const [allRoutes, setAllRoutes] = useState([]);
     const [mainVidTitle, setMainVidTitle] = useState('');
 
@@ -21,11 +24,11 @@ export default function MainVid() {
 
     const player = useRef<ReactPlayer>(null)
 
-    let randoNext = ()=>{
+    let randoNext = () => {
         var existingRoutes = localStorage.getItem("allRoutes");
-        if(existingRoutes){
-          setAllRoutes(JSON.parse(existingRoutes))
-        }else{
+        if (existingRoutes) {
+            setAllRoutes(JSON.parse(existingRoutes))
+        } else {
             console.log('borklyfe')
         }
 
@@ -41,14 +44,15 @@ export default function MainVid() {
         return chosenFile
     }
 
-    const setRando = (e: any) => {
+    const setRando = () => {
         console.log(allRoutes)
-        let RandoNumInArr = Math.ceil(Math.random() * allRoutes.length)
-        let rando = allRoutes[RandoNumInArr];
+        let randoNumInArr = Math.ceil(Math.random() * allRoutes.length)
+        console.log(randoNumInArr)
+        let rando = allRoutes[randoNumInArr];
         localStorage.setItem('fileChosen', rando['VidRoute']);
         localStorage.setItem('mainVidName', rando['VidName']);
         window.location.reload()
-      }
+    }
 
     let volLoop = (e: any) => {
         console.log(vol)
@@ -113,7 +117,7 @@ export default function MainVid() {
 
             playa?.seekTo(playa?.getCurrentTime() - 30)
             console.log(playa?.getCurrentTime())
-            console.log(playa)
+            // console.log(playa)
         } else {
             console.log(playa)
         }
@@ -122,46 +126,109 @@ export default function MainVid() {
     let onSeekMouseUp = (e: any) => {
         console.log('onSeek', e);
     }
+
+
+    let setTime = () => {
+        const playa = player.current
+        if (playa !== null) {
+            let ct = playa?.getCurrentTime()
+            setCurrentTime(ct)
+            
+        } else {
+            console.log('borklyfe')
+        }
+    }
     
+    let controlsTog = () => {
+        if (controls) {
+            
+            setControls(false)
+        } else {
+            setControls(true)
+        }
+    }
+    
+    let playPauseToggle = () => {
+        if (playPause) {
+            setPlayPause(false)
+        } else {
+            setPlayPause(true)
+        }
+    }
+    let cb = () =>{
+
+    }
     
     
     useEffect(() => {
+        const playa = player.current
+        let okInter = setInterval(setTime,100);
+       
         thing()
+        setPlayPause(true)
     }, []);
     
     
     return (
-        <Container >
-            <Container >
+        <Container fluid>
+            <Container fluid>
+                <Container fluid>
+
+                    <Row className='mainVidTitleRow shad pt-2 mb-4 w-100'>
+                        <Col>
+                            {mainVidTitle}
+                        </Col>
+                    </Row>
+                </Container>
+                <Container>
+                    <Row>
+
+                        <Col>
+                            <Button color='prim' className='controlButt shad' onClick={controlsTog}>
+                                <img className='controlButt shad' height='25px' src={yellowCog} alt="" /></Button>
+                        </Col>
+                    </Row>
+                </Container>
+                <Container className='d-flex justify-content-center mt-4 mb-4'>
+                    <Row>
+
+                        <ReactPlayer
+                            url={globURL + 'vids/' + stateFile}
+                            playing={playPause}
+                            ref={player}
+                            forceAudio={true}
+                            playbackRate={pBRate}
+                            onSeek={onSeekMouseUp}
+                            width='100%'
+                            height='100%'
+                            controls={controls}
+                            volume={vol}
+                        />
+                    </Row>
+                </Container>
                 <Container >
-
-                <Row className='mainVidTitleRow shad pt-5'>
+                    <Row >
+                        <Col>
+                            {currentTime + ' / ' + player?.current?.getDuration()}
+                        </Col>
+                    </Row>
+                </Container>
+                <Row className='pt-3 pb-3'>
                     <Col>
-                {mainVidTitle}
+                        <Button className='randoButt shad' color='prim' onClick={volLoop}>
+                            <Ico />
+                        </Button>
                     </Col>
-                </Row>
-                </Container>
-                <Container className='d-flex justify-content-center'>
-                <Row>
+                    <Col>
+                        <Progress animated color="warning" value={currentTime} max={player?.current?.getDuration()} />
+                    </Col>
+                    <Col>
+                        <Button color="prim" className='randoButt shad' onClick={setRando}>{'Rando Vid >|'}</Button>
+                    </Col>
 
-                    <ReactPlayer
-                        url={globURL + 'vids/' + stateFile}
-                        playing={true}
-                        ref={player}
-                        forceAudio={true}
-                        playbackRate={pBRate}
-                        onSeek={onSeekMouseUp}
-                        width='900px'
-                        height='500px'
-                        loop={true}
-                        controls={true}
-                        volume={vol}
-                    />
                 </Row>
-                </Container>
-            <Button color="prim" className='randoButt shad' onClick={setRando}>{'Rando Vid >|'}</Button>
             </Container>
-            <Container>
+            <Container className='pt-3 pb-3'>
                 <Row>
                     <Col>
                         <Button color='prim' className='controlButt shad' onClick={begin}>{'|<5'}</Button>
@@ -188,17 +255,15 @@ export default function MainVid() {
                         </Dropdown>
                     </Col>
                     <Col>
+                        <Button color='prim' className='controlButt ppButt shad' onClick={playPauseToggle}>
+                            <Playbutt />
+                        </Button>
+                    </Col>
+                    <Col>
                         <Button color='prim' className='controlButt shad' onClick={forSkip}>{'30>>'}</Button>
                     </Col>
                     <Col>
                         <Button color='prim' className='controlButt shad' onClick={end}>{'5>|'}</Button>
-                    </Col>
-                    <Col>
-                        <Button className='controlButt shad' color='prim' onClick={volLoop}>
-                            <Ico />
-                        </Button>
-                    </Col>
-                    <Col>
                     </Col>
                 </Row>
             </Container>
