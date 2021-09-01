@@ -6,11 +6,17 @@ import {
 import { useHistory } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-
 import globURL from "../Utils/urlSwitcher";
 import fetchy from "../Utils/fetcher";
 
+
+import { hashy, deHashy } from '../Utils/crypto';
+
+
+
 const Home = () => {
+
+
 
   const history = useHistory();
   const [allRoutes, setAllRoutes] = useState([]);
@@ -18,9 +24,9 @@ const Home = () => {
   let ok = [] as any
   const data = async () => {
     var existingRoutes = localStorage.getItem("allRoutes");
-    if(existingRoutes){
+    if (existingRoutes) {
       setAllRoutes(JSON.parse(existingRoutes))
-    }else{
+    } else {
       fetchy(globURL + 'dirList').then(async (data) => {
         // console.log(data.userTrunk);
         let derta = await data
@@ -38,16 +44,15 @@ const Home = () => {
 
   useEffect(() => {
     data()
-
   }, []);
 
   let ninja = (e: any) => {
     let okay = e.target.parentElement.parentElement.querySelector('.vidCardBod').classList
-    if(okay !== null) {
-    console.log(okay)
-    okay.remove("ninjaVanish")
-    okay.add("ninja")
-    }else{
+    if (okay !== null) {
+      console.log(okay)
+      okay.remove("ninjaVanish")
+      okay.add("ninja")
+    } else {
       console.log('nulllsz')
     }
   }
@@ -82,6 +87,7 @@ const Home = () => {
     let okay = e.target.id
     console.log(okay)
     localStorage.setItem('fileChosen', okay);
+    localStorage.setItem('mainVidName', okay);
     history.push("/mainVid");
   }
 

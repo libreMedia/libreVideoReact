@@ -11,6 +11,7 @@
     "@types/react": "^16.14.14",
     "@types/react-dom": "^16.9.14",
     "bootstrap": "^5.1.0",
+    "crypto-js": "^4.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-lazy-load-image-component": "^1.5.1",
@@ -59,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.0.2",
     "@types/react-lazy-load-image-component": "^1.5.2",
     "@types/react-router-dom": "^5.1.8"
   }

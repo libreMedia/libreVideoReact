@@ -119,7 +119,8 @@ $sec: #F5E534;
 }
 
 .nav-container-container a{
-  color:white;
+  color:$sec;
+  font-family: Blockletter;
 }
 .nav-container-container a:hover{
   color:$sec;

@@ -7,7 +7,7 @@ import Ico from "../Utils/Ico";
 import Playbutt from "../Utils/PlayButt";
 import { setInterval } from "timers";
 
-
+let yellowCog = "http://www.clker.com/cliparts/4/5/9/D/X/I/gear-orange-cog-hi.png"
 
 export default function MainVid() {
     const [stateFile, setChosenFile] = useState<string>();
@@ -44,10 +44,11 @@ export default function MainVid() {
         return chosenFile
     }
 
-    const setRando = (e: any) => {
+    const setRando = () => {
         console.log(allRoutes)
-        let RandoNumInArr = Math.ceil(Math.random() * allRoutes.length)
-        let rando = allRoutes[RandoNumInArr];
+        let randoNumInArr = Math.ceil(Math.random() * allRoutes.length)
+        console.log(randoNumInArr)
+        let rando = allRoutes[randoNumInArr];
         localStorage.setItem('fileChosen', rando['VidRoute']);
         localStorage.setItem('mainVidName', rando['VidName']);
         window.location.reload()
@@ -131,13 +132,13 @@ export default function MainVid() {
         const playa = player.current
         if (playa !== null) {
             let ct = playa?.getCurrentTime()
-            // console.log(ct)
             setCurrentTime(ct)
+            
         } else {
             console.log('borklyfe')
         }
     }
-
+    
     let controlsTog = () => {
         if (controls) {
             
@@ -146,7 +147,7 @@ export default function MainVid() {
             setControls(true)
         }
     }
-
+    
     let playPauseToggle = () => {
         if (playPause) {
             setPlayPause(false)
@@ -154,16 +155,20 @@ export default function MainVid() {
             setPlayPause(true)
         }
     }
+    let cb = () =>{
 
-
+    }
+    
+    
     useEffect(() => {
-        setInterval(() => {
-            setTime()
-        }, 100);
+        const playa = player.current
+        let okInter = setInterval(setTime,100);
+       
         thing()
+        setPlayPause(true)
     }, []);
-
-
+    
+    
     return (
         <Container fluid>
             <Container fluid>
@@ -172,6 +177,15 @@ export default function MainVid() {
                     <Row className='mainVidTitleRow shad pt-2 mb-4 w-100'>
                         <Col>
                             {mainVidTitle}
+                        </Col>
+                    </Row>
+                </Container>
+                <Container>
+                    <Row>
+
+                        <Col>
+                            <Button color='prim' className='controlButt shad' onClick={controlsTog}>
+                                <img className='controlButt shad' height='25px' src={yellowCog} alt="" /></Button>
                         </Col>
                     </Row>
                 </Container>
@@ -185,16 +199,11 @@ export default function MainVid() {
                             forceAudio={true}
                             playbackRate={pBRate}
                             onSeek={onSeekMouseUp}
-                            width='900px'
-                            height='500px'
-                            loop={true}
+                            width='100%'
+                            height='100%'
                             controls={controls}
                             volume={vol}
                         />
-                        <Col>
-                            <Button color='prim' className='controlButt shad' onClick={controlsTog}>
-                                <img className='controlButt shad' height='25px' src="http://www.clker.com/cliparts/4/5/9/D/X/I/gear-orange-cog-hi.png" alt="" /></Button>
-                        </Col>
                     </Row>
                 </Container>
                 <Container >
@@ -211,7 +220,7 @@ export default function MainVid() {
                         </Button>
                     </Col>
                     <Col>
-                        <Progress animated color="prim" value={currentTime} max={player?.current?.getDuration()} />
+                        <Progress animated color="warning" value={currentTime} max={player?.current?.getDuration()} />
                     </Col>
                     <Col>
                         <Button color="prim" className='randoButt shad' onClick={setRando}>{'Rando Vid >|'}</Button>
