@@ -10,6 +10,7 @@ import globURL from "../Utils/urlSwitcher";
 import fetchy from "../Utils/fetcher";
 import rareHoss from "../Utils/rareHoss";
 import AlphaDrop from "../Components/HomeAlphaDrop";
+import HomeSearch from "../Components/HomeSearchBar";
 
 
 import { hashy, deHashy } from '../Utils/crypto';
@@ -25,13 +26,14 @@ const Home = () => {
   const [rootAllRoutes, setRootAllRoutes] = useState<any[]>([]);
   const [allRoutes, setAllRoutes] = useState<any[]>([]);
   const [alphaSetArr, setAlphaSet] = useState<any[]>([]);
+  const [searchQ, setSearchQ] = useState<string>('');
 
   let ok = [] as any
   let alphaSet = new Set()
 
-  const alphaSort = (arr:any[]) => {
-    arr.sort(function(a, b) {
-      var nameA = a; 
+  const alphaSort = (arr: any[]) => {
+    arr.sort(function (a, b) {
+      var nameA = a;
       var nameB = b;
       if (nameA < nameB) {
         return -1;
@@ -39,27 +41,26 @@ const Home = () => {
       if (nameA > nameB) {
         return 1;
       }
-    
+
       // names must be equal
       return 0;
     });
   }
 
-  const setAlpha= (arr:string[])=>{
-    if(ok != null){
+  const setAlpha = (arr: string[]) => {
+    if (ok != null) {
       ok.forEach((element: { VidName: string; }) => {
         let alphaAvailible = element.VidName.charAt(0).toLowerCase()
         alphaSet.add(alphaAvailible)
       });
     }
     let arrFromSet = Array.from(alphaSet)
-    arrFromSet.sort(function(a:any, b:any) {
+    arrFromSet.sort(function (a: any, b: any) {
       return a - b;
     });
     alphaSort(arrFromSet)
-    console.log(arrFromSet)
     setAlphaSet(arrFromSet)
-    
+
   }
   const data = async () => {
     // var existingRoutes = localStorage.getItem("allRoutes");
@@ -130,13 +131,14 @@ const Home = () => {
     history.push("/mainVid");
   }
 
-  const paginateCharAt = (selected:string) => {
-    let newThing: object[]  = []
+
+  const paginateCharAt = (selected: string) => {
+    let newThing: object[] = []
     let oldArr = rootAllRoutes
     oldArr.forEach(element => {
       if (element !== null) {
         let vidName = element.VidName
-        if(vidName.charAt(0)===selected|| vidName.charAt(0)===selected.toUpperCase()){
+        if (vidName.charAt(0) === selected || vidName.charAt(0) === selected.toUpperCase()) {
           // console.log(element.VidName)
           newThing.push(element)
         }
@@ -145,27 +147,61 @@ const Home = () => {
     setAllRoutes(newThing)
   }
 
-  const handleSelect = (e:any)=> {
+  let filterIt = (arr: any[], searchKey: any) => {
+    let searchArr: object[] = []
+    arr.forEach(element => {
+      if (element.VidName.toLowerCase().includes(searchKey.toLowerCase())) {
+        searchArr.push(element)
+      }
+    });
+
+    if (searchArr.length <= 0) {
+      setAllRoutes([{
+        ScreenShotFileLoc: null,
+        ScreenShotRoute: '/screen-shots/rareHoss.jpg',
+        VidFileLoc: null,
+        VidName: "You're cruisn' for a brusin'! \n Don't Click Hoss!",
+        VidRoute: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=PL2MI040U_GXq1L5JUxNOulWCyXn-7QyZK'
+      }])
+    } else {
+      console.log(searchArr)
+      setAllRoutes(searchArr)
+    }
+
+  }
+
+
+
+  // let muhArr: object[] = []
+  const inputChange = (e: any) => {
+    // console.log(e)
+    filterIt(rootAllRoutes, e)
+  }
+
+  const handleSelect = (e: any) => {
     paginateCharAt(e)
- }
+  }
 
   let gu = globURL.slice(0, -1)
   return (
     <Container className='pt-5'>
-      <Jumbotron className='jumboTron' fluid>
+      <Jumbotron className='jumboTron shad' fluid>
         <h1 className="display-3 jumboTitle">Libre Video</h1>
         <p className="lead">Enjoy the freedom of your own videos</p>
-        <hr className="my-2" />
-        <p>Don't tread on me </p>
-        <img height='100px' src={rareHoss} alt="Rare Hoss.jpg" />
+        <hr className="pb-2 shad" />
+        {/* <p>Don't tread on me </p>
+        <img height='100px' src={rareHoss} alt="Rare Hoss.jpg" /> */}
         {/* <p>RareHoss.jpg</p> */}
       </Jumbotron>
-      <Row>
-        <Col>
-          <Button color="prim" className='randoButt mt-5' onClick={setRando}>Play Rando Vid</Button>
+      <Row className='mb-4'>
+        <Col md='2'>
+          <AlphaDrop dropDownTitle={'Starts With'} handleSelect={handleSelect} menuTitle={'Get all videos starting with'} menuPages={alphaSetArr} />
         </Col>
-        <Col>
-          <AlphaDrop dropDownTitle={'Starts With'} handleSelect={handleSelect} menuTitle={'Get all videos starting with'} menuPages={alphaSetArr}/>
+        <Col md='8'>
+          <HomeSearch searchQuery={searchQ} inputChange={inputChange} />
+        </Col>
+        <Col md='2'>
+          <Button color="prim" className='randoButt mt-5 shad' onClick={setRando}>Play Rando Vid</Button>
         </Col>
       </Row>
       <hr className="my-2" />
