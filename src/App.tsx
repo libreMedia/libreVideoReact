@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useEffect } from "react";
 import Nav from "./Components/Nav";
 import './App.css';
 

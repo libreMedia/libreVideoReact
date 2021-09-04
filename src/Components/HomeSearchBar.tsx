@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input,Row, Col } from 'reactstrap';
+import {Input} from 'reactstrap';
 
 interface SearchItems {
     searchQuery: string,

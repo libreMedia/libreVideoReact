@@ -40,41 +40,44 @@ $sec: #F5E534;
 
 
 .ninjaVanish{
-  padding: 0;
-  margin: 0;
-  visibility: hidden;
+  height: 100%;
+  width: 100%;
   position: absolute;
   opacity: 0;
-  display: none;
-  -webkit-transition: width 2s ease, height 2s ease;
-  -moz-transition: width 2s ease, height 2s ease;
-  -o-transition: width 2s ease, height 2s ease;
-  transition: width 2s ease, height 2s ease;
+  transition: 1200ms;
 }
 
-.ninja{
-  position: fixed;
-  top: 0;
-  right: 0%;
-  height: 100%;
-  width: 17vw;
-  z-index: 99;
-  background-color: honeydew;
-  box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
-}
-
-.vidCardBod{
+.ninjaVanish p{
   color: $sec;
-  background-color: $prim;
-  hyphens: auto;
-  flex-direction: column;
-  display: flex;
-  text-align: center;
-  align-items:center; 
-  justify-content: center;
 }
+
+
+// .ninja {
+
+//   position: absolute;
+//   transform: translate(100%, 0);
+//   z-index: 99;
+//   background-color: black;
+//   box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
+//   -webkit-box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
+// }
+
+.boba:hover{
+
+  .ninjaVanish{
+    background-color: rgba(34, 37, 106, 0.80);
+    justify-content: center;
+    align-content: center;
+    transition: 600ms;
+    opacity: 1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+}
+
 .card-title{
+  color: $sec;
   font-family: Blockletter;
   font-size: 2em;
   white-space: pre-wrap;
