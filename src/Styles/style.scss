@@ -154,6 +154,26 @@ $sec: #F5E534;
   fill:white;
 }
 
+.alphaDrop{
+  color: $sec;
+  font-family: Blockletter;
+}
+
+.dropdown-menu{
+  background-color: $prim;
+}
+
+.dropdown-item{
+  color: $sec;
+  font-family: Blockletter;
+}
+
+.dropdown-header{
+  font-size: 1.3em;
+  color: $sec;
+  font-family: Blockletter;
+}
+
 .mainVidTitleRow{
   font-size: 3em;
   background-color: $prim;
