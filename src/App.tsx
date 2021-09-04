@@ -4,8 +4,6 @@ import './App.css';
 
 function App() {
   
-  const [allRoutes, setAllRoutes] = useState<string[]>([]);
-
 useEffect(() => {
 
 },[]);
