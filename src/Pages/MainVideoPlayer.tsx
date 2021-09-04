@@ -16,7 +16,7 @@ export default function MainVid() {
     const [vol, setVol] = useState<number>(1);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [playPause, setPlayPause] = useState(true);
-    const [controls, setControls] = useState(false);
+    const [controls, setControls] = useState(true);
     const [allRoutes, setAllRoutes] = useState([]);
     const [mainVidTitle, setMainVidTitle] = useState('');
 

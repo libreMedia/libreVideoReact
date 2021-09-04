@@ -21,7 +21,7 @@ const AlphaDrop = ({dropDownTitle, menuTitle, menuPages, handleSelect }: DDMenuI
 
     return (
             <Dropdown className='mt-5'  isOpen={dropdownOpen} toggle={toggle}>
-                <DropdownToggle color='prim' className='randoButt alphaDrop' caret>
+                <DropdownToggle color='prim' className='randoButt alphaDrop shad' caret>
                     {dropDownTitle}
                 </DropdownToggle>
                 <DropdownMenu>
