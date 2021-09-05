@@ -39,6 +39,34 @@ $sec: #F5E534;
 }
 
 
+.chevron-right {
+  -webkit-clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+      clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+
+.shape-outer {
+  display: flex;
+  flex-shrink: 0;
+  height: calc(150px + 4vw);
+  width: calc(150px + 4vw);
+  margin: 25px;
+  background-image: linear-gradient(to bottom right, $prim, $sec, $prim);
+}
+
+.shape-inner {	
+  height: calc(130px + 4vw);
+  width: calc(130px + 4vw);
+  background: url(https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=faces) no-repeat center;
+  background-size: cover;
+  margin: auto;
+}
+
+.rabbet {
+  -webkit-clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
+      clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
+}
+
+
 .ninjaVanish{
   height: 100%;
   width: 100%;
@@ -61,6 +89,11 @@ $sec: #F5E534;
 //   box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
 //   -webkit-box-shadow: 0px 12px 25px -4px rgba(0, 0, 0, 0.5);
 // }
+
+.shape-inner:hover{
+  transition: 4000ms;
+ background: url('http://localhost:9000/screen-shots/rareHoss.jpg');
+}
 
 .boba:hover{
 
