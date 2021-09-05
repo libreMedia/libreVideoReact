@@ -1,6 +1,6 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Jumbotron, Button, Container, Row, Col, Card, CardImg, CardText, CardBody,
+  Jumbotron, Button, Container, Row, Col, Card, CardText, CardBody,
   CardTitle, CardSubtitle,
 } from 'reactstrap';
 import { useHistory } from "react-router-dom";
@@ -8,12 +8,13 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import globURL from "../Utils/urlSwitcher";
 import fetchy from "../Utils/fetcher";
-import rareHoss from "../Utils/rareHoss";
 import AlphaDrop from "../Components/HomeAlphaDrop";
 import HomeSearch from "../Components/HomeSearchBar";
+import rareHoss from "../Utils/rareHoss";
+
+// import { hashy, deHashy } from '../Utils/crypto';
 
 
-import { hashy, deHashy } from '../Utils/crypto';
 
 // let alphabet = 'abcdefghijklmnopqrstuvwxyz'
 // let alphaArr = alphabet.split('')
@@ -84,37 +85,34 @@ const Home = () => {
     // }
   };
 
+  let classMaker = () => {
+    let bb = document.querySelectorAll('.vidCardBod')
+    // for (let i = 0; i < 99; i++) {
+    //     let ok = i
+    //     if (ok % 2 === 0 ){
+    //       bb.add
+    //     }if (ok % 3 === 0 ) {
+    //       return '1'
+    //     }
+    // }
+    console.log(bb)
+  };
+
+  let changeHoss = ()=>{
+    let hoss= document.querySelector<HTMLElement>('#hoss')
+    console.log(hoss)
+    if (hoss != null) {
+      hoss.style.backgroundImage = `url('${rareHoss}')`;
+    }
+  }
 
 
   useEffect(() => {
+    changeHoss()
     data()
+    classMaker()
   }, []);
 
-  let ninja = (e: any) => {
-    let okay = e.target.parentElement.parentElement.querySelector('.vidCardBod').classList
-    if (okay !== null) {
-      console.log(okay)
-      okay.remove("ninjaVanish")
-      okay.add("ninja")
-    } else {
-      console.log('nulllsz')
-    }
-  }
-  let ninjaVanish = (e: any) => {
-    let okay = e.target.parentElement.parentElement.querySelector('.vidCardBod').classList
-    okay.remove("ninja")
-    okay.add("ninjaVanish")
-  }
-  let ninjaD = (e: any) => {
-    let okay = e.target.classList
-    okay.remove("ninjaVanish")
-    okay.add("ninja")
-  }
-  let ninjaVanishD = (e: any) => {
-    let okay = e.target.classList
-    okay.remove("ninja")
-    okay.add("ninjaVanish")
-  }
 
   const setRando = (e: any) => {
     console.log(allRoutes)
@@ -160,7 +158,7 @@ const Home = () => {
         ScreenShotFileLoc: null,
         ScreenShotRoute: '/screen-shots/rareHoss.jpg',
         VidFileLoc: null,
-        VidName: "You're cruisn' for a brusin'! \n Don't Click Hoss!",
+        VidName: "This Road is empty hoss! \n Keep cruisin' if you know what's good for you!",
         VidRoute: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=PL2MI040U_GXq1L5JUxNOulWCyXn-7QyZK'
       }])
     } else {
@@ -169,7 +167,6 @@ const Home = () => {
     }
 
   }
-
 
 
   // let muhArr: object[] = []
@@ -186,11 +183,17 @@ const Home = () => {
   return (
     <Container className='pt-5'>
       <Jumbotron className='jumboTron shad' fluid>
+        <Row>
+          <Col  className=' d-flex justify-content-center'>
+        <div className="shape-outer rabbet hoss">
+          <div id='hoss' className="shape-inner rabbet"></div>
+        </div>
+          </Col>
+        </Row>
         <h1 className="display-3 jumboTitle">Libre Video</h1>
         <p className="lead">Enjoy the freedom of your own videos</p>
         <hr className="pb-2 shad" />
         {/* <p>Don't tread on me </p>
-        <img height='100px' src={rareHoss} alt="Rare Hoss.jpg" /> */}
         {/* <p>RareHoss.jpg</p> */}
       </Jumbotron>
       <Row className='mb-4'>
@@ -208,13 +211,14 @@ const Home = () => {
       <Container fluid>
         <Row className='align-items-center'>
           {allRoutes.map(vid => (
-            <Col lg={{ size: 6 }} sm="12" className='pt-3 pb-3'>
-              <Card className="shad">
+            <Col lg={{ size: 6 }} sm="12" className='p-5'>
+              <Card className="shad boba d-flex justify-content-center">
                 {/* <CardImg top height="300px" id={`${vid['VidRoute']}`} className='card-img' src={`${gu}${vid['ScreenShotRoute']}`} onClick={setLinkInStorage} onMouseEnter={ninja} onMouseLeave={ninjaVanish} alt="Card image cap" /> */}
                 <LazyLoadImage
+                  key={vid.VidName}
                   onClick={setLinkInStorage}
-                  onMouseEnter={ninja}
-                  onMouseLeave={ninjaVanish}
+                  // onMouseEnter={ninja}
+                  // onMouseLeave={ninjaVanish}
                   id={`${vid['VidRoute']}`}
                   className='card-img'
                   // placeholder={baser}
@@ -227,7 +231,8 @@ const Home = () => {
                   width="100%"
                   height="300px"
                 />
-                <CardBody className="vidCardBod  ninjaVanish" onMouseEnter={ninjaD} onMouseLeave={ninjaVanishD}>
+                {/* onMouseEnter={ninjaD} onMouseLeave={ninjaVanishD} */}
+                <CardBody className={`vidCardBod ninjaVanish`}>
                   <CardTitle tag="h5">{vid['VidName']}</CardTitle>
                   {/*TODO
               parse/regex the titles and remove odd chard between () or [] and replace . with whitespace

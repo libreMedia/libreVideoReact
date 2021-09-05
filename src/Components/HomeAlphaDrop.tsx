@@ -13,12 +13,6 @@ const AlphaDrop = ({dropDownTitle, menuTitle, menuPages, handleSelect }: DDMenuI
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
-    // const handleSelect = (e:any)=> {
-    //     console.log(e.target.value)
-    //     let newVal = e.target.value
-    //     setDropdownName(newVal)
-    //  }
-
     return (
             <Dropdown className='mt-5'  isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle color='prim' className='randoButt alphaDrop shad' caret>
@@ -28,7 +22,7 @@ const AlphaDrop = ({dropDownTitle, menuTitle, menuPages, handleSelect }: DDMenuI
                     <DropdownItem header>{menuTitle}</DropdownItem>
                     {
                         menuPages.map(menuCat => (
-                            <DropdownItem onClick={()=>{handleSelect(menuCat)}} value={menuCat}> {menuCat} </DropdownItem>
+                            <DropdownItem key={menuCat} onClick={()=>{handleSelect(menuCat)}} value={menuCat}> {menuCat} </DropdownItem>
                             ))
                         }
                    
