@@ -25,4 +25,4 @@ This will be a React app, and you are now free to enjoy your videos with complim
 # Video Player
 currently Libre Video plays videos with [React-Player](https://www.npmjs.com/package/react-player)
 
-![short demo video of libre video](https://i.ibb.co/djznT37/2021-10-18-10h20-10.gif)
+![short demo video of libre video](https://i.ibb.co/dKy3VwM/Sequence-01-1.gif)
