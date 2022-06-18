@@ -21,7 +21,7 @@ import {
   } from 'reactstrap';
 import Home from '../Pages/Home'
 import MainVid from '../Pages/MainVideoPlayer'
-
+import logo from '../assets/images/logo.svg';
 export default function NavBra() {
 
 
@@ -37,7 +37,7 @@ export default function NavBra() {
         <Container className='nav-container' fluid={true}>
       <Navbar color="prim" expand="md">
         <Container className='nav-container-container' >
-        <NavbarBrand href="/"><img id="pics" src="https://i.ibb.co/pbC7mhp/libre-Vid-Trans.png" height="75px" width="150px" alt='Libre Video logo ' /></NavbarBrand>
+        <NavbarBrand href="/"><img id="pics" src={logo} width="50%" alt='Libre Video logo ' /></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
