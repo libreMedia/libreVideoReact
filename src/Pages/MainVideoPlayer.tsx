@@ -51,7 +51,37 @@ export default function MainVid() {
         let rando = allRoutes[randoNumInArr];
         localStorage.setItem('fileChosen', rando['VidRoute']);
         localStorage.setItem('mainVidName', rando['VidName']);
-        window.location.reload()
+        setMainVidTitle(rando['VidName'])
+        setChosenFile(rando['VidRoute'])
+    }
+
+
+
+    const setNext = (e: any) => {
+
+        let rooot: any;
+        let vidNamee: any;
+
+        allRoutes.find((thing1: any, thing2: any) => {
+            // console.log(thing1.VidFileLoc, thing2);
+            e.preventDefault()
+            if (thing1.VidRoute === localStorage.getItem('fileChosen')) {
+                const thing3 = allRoutes[thing2 + 1]
+                console.log(thing3);
+
+                console.log(thing3);
+                rooot = thing3['VidRoute']
+                vidNamee = thing3['VidName']
+
+            }
+
+        })
+        console.log('route: ', rooot);
+        console.log('vidName: ', vidNamee);
+        localStorage.setItem('fileChosen', rooot);
+        localStorage.setItem('mainVidName', vidNamee);
+        setMainVidTitle(vidNamee)
+        setChosenFile(rooot)
     }
 
     let volLoop = (e: any) => {
@@ -133,9 +163,6 @@ export default function MainVid() {
         if (playa !== null) {
             let ct = playa?.getCurrentTime()
             setCurrentTime(ct)
-
-        } else {
-            console.log('borklyfe')
         }
     }
 
@@ -222,7 +249,12 @@ export default function MainVid() {
                         <Progress animated color="warning" value={currentTime} max={player?.current?.getDuration()} />
                     </Col>
                     <Col>
-                        <Button color="prim" className='randoButt shad' onClick={setRando}>{'Rando Vid >|'}</Button>
+                        <Col className="p-1">
+                            <Button color="prim" className='randoButt shad' onClick={setRando}>{'Rando Vid >|'}</Button>
+                        </Col>
+                        <Col className="p-1">
+                            <Button color="prim" className='randoButt shad' onClick={setNext}>{'DB Next Vid >|'}</Button>
+                        </Col>
                     </Col>
 
                 </Row>

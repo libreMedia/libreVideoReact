@@ -95,7 +95,6 @@ const Home = () => {
     //       return '1'
     //     }
     // }
-    console.log(bb)
   };
 
   let changeHoss = ()=>{
@@ -210,7 +209,7 @@ const Home = () => {
       <hr className="my-2" />
         <Row className='align-items-center'>
           {allRoutes.map(vid => (
-            <Col s={{ size: 12 }} lg={{ size: 3 }} className='p-5'>
+            <Col s={{ size: 12 }} lg={{ size: 4 }} className='p-5'>
               <Card className="shad boba d-flex justify-content-center">
                 {/* <CardImg top height="300px" id={`${vid['VidRoute']}`} className='card-img' src={`${gu}${vid['ScreenShotRoute']}`} onClick={setLinkInStorage} onMouseEnter={ninja} onMouseLeave={ninjaVanish} alt="Card image cap" /> */}
                 <LazyLoadImage
