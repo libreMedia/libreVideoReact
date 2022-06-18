@@ -99,7 +99,7 @@ const Home = () => {
 
   let changeHoss = ()=>{
     let hoss= document.querySelector<HTMLElement>('#hoss')
-    console.log(hoss)
+    // console.log(hoss)
     if (hoss != null) {
       hoss.style.backgroundImage = `url('${rareHoss}')`;
     }
@@ -122,9 +122,11 @@ const Home = () => {
     history.push("/mainVid");
   }
   const setLinkInStorage = (e: any) => {
-    let okay = e.target.id
-    localStorage.setItem('fileChosen', okay);
-    localStorage.setItem('mainVidName', okay);
+    console.log(e.target)
+    let videoLoc = e.target.id
+    let videoName = e.target.name
+    localStorage.setItem('fileChosen', videoLoc);
+    localStorage.setItem('mainVidName', videoName);
     history.push("/mainVid");
   }
 
@@ -237,7 +239,7 @@ const Home = () => {
               */},
                   <a href={`${gu}${vid['ScreenShotRoute']}`}><CardSubtitle tag="h6" className="mb-2 text-muted">screen-shot link</CardSubtitle></a>
                   <CardText>Watch the show already...</CardText>
-                  <Button className='watchButt' color='sec' id={`${vid['VidRoute']}`} onClick={setLinkInStorage}>Watch</Button>
+                  <Button className='watchButt' color='sec' id={`${vid['VidRoute']}`} name={`${vid['VidName']}`} onClick={setLinkInStorage}>Watch</Button>
                 </CardBody>
               </Card>
             </Col>

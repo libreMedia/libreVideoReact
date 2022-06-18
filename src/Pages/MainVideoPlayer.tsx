@@ -38,16 +38,13 @@ export default function MainVid() {
         randoNext()
         let chosenTitle = localStorage.getItem('mainVidName');
         const chosenFile = localStorage.getItem('fileChosen');
-        console.log(chosenFile)
         setChosenFile(chosenFile as string)
         setMainVidTitle(chosenTitle as string)
         return chosenFile
     }
 
     const setRando = () => {
-        console.log(allRoutes)
         let randoNumInArr = Math.ceil(Math.random() * allRoutes.length)
-        console.log(randoNumInArr)
         let rando = allRoutes[randoNumInArr];
         localStorage.setItem('fileChosen', rando['VidRoute']);
         localStorage.setItem('mainVidName', rando['VidName']);
@@ -59,29 +56,22 @@ export default function MainVid() {
 
     const setNext = (e: any) => {
 
-        let rooot: any;
-        let vidNamee: any;
+        let rotePath: any;
+        let vidName: any;
 
-        allRoutes.find((thing1: any, thing2: any) => {
-            // console.log(thing1.VidFileLoc, thing2);
+        allRoutes.find((obj: any, arrayIndex: any) => {
             e.preventDefault()
-            if (thing1.VidRoute === localStorage.getItem('fileChosen')) {
-                const thing3 = allRoutes[thing2 + 1]
-                console.log(thing3);
-
-                console.log(thing3);
-                rooot = thing3['VidRoute']
-                vidNamee = thing3['VidName']
-
+            if (obj.VidRoute === localStorage.getItem('fileChosen')) {
+                const nextVideo = allRoutes[arrayIndex + 1]
+                rotePath = nextVideo['VidRoute']
+                vidName = nextVideo['VidName']
             }
-
         })
-        console.log('route: ', rooot);
-        console.log('vidName: ', vidNamee);
-        localStorage.setItem('fileChosen', rooot);
-        localStorage.setItem('mainVidName', vidNamee);
-        setMainVidTitle(vidNamee)
-        setChosenFile(rooot)
+        
+        localStorage.setItem('fileChosen', rotePath);
+        localStorage.setItem('mainVidName', vidName);
+        setMainVidTitle(vidName)
+        setChosenFile(rotePath)
     }
 
     let volLoop = (e: any) => {
@@ -190,7 +180,6 @@ export default function MainVid() {
     useEffect(() => {
         const playa = player.current
         let okInter = setInterval(setTime, 100);
-
         thing()
         setPlayPause(true)
     }, []);
