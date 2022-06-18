@@ -133,21 +133,21 @@ export default function MainVid() {
         if (playa !== null) {
             let ct = playa?.getCurrentTime()
             setCurrentTime(ct)
-            
+
         } else {
             console.log('borklyfe')
         }
     }
-    
+
     let controlsTog = () => {
         if (controls) {
-            
+
             setControls(false)
         } else {
             setControls(true)
         }
     }
-    
+
     let playPauseToggle = () => {
         if (playPause) {
             setPlayPause(false)
@@ -155,20 +155,20 @@ export default function MainVid() {
             setPlayPause(true)
         }
     }
-    let cb = () =>{
+    let cb = () => {
 
     }
-    
-    
+
+
     useEffect(() => {
         const playa = player.current
-        let okInter = setInterval(setTime,100);
-       
+        let okInter = setInterval(setTime, 100);
+
         thing()
         setPlayPause(true)
     }, []);
-    
-    
+
+
     return (
         <Container fluid>
             <Container fluid>
@@ -190,8 +190,7 @@ export default function MainVid() {
                     </Row>
                 </Container>
                 <Container className='d-flex justify-content-center mt-4 mb-4'>
-                    <Row>
-
+                    <Row className='resize' style={{ height: '41.5vh' }} >
                         <ReactPlayer
                             url={globURL + 'vids/' + stateFile}
                             playing={playPause}

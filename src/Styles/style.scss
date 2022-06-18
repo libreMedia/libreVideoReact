@@ -236,3 +236,8 @@ $sec: #F5E534;
   color: $sec;
   font-family: Blockletter;
 }
+
+.resize{
+  resize: both;
+  overflow: hidden; /* Hide scrollbars */
+}

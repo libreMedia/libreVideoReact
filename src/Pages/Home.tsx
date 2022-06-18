@@ -181,10 +181,10 @@ const Home = () => {
 
   let gu = globURL.slice(0, -1)
   return (
-    <Container className='pt-5'>
+    <>
       <Jumbotron className='jumboTron shad' fluid>
         <Row>
-          <Col  className=' d-flex justify-content-center'>
+          <Col  className='d-flex justify-content-center'>
         <div className="shape-outer rabbet hoss">
           <div id='hoss' className="shape-inner rabbet"></div>
         </div>
@@ -208,10 +208,9 @@ const Home = () => {
         </Col>
       </Row>
       <hr className="my-2" />
-      <Container fluid>
         <Row className='align-items-center'>
           {allRoutes.map(vid => (
-            <Col lg={{ size: 6 }} sm="12" className='p-5'>
+            <Col s={{ size: 12 }} lg={{ size: 3 }} className='p-5'>
               <Card className="shad boba d-flex justify-content-center">
                 {/* <CardImg top height="300px" id={`${vid['VidRoute']}`} className='card-img' src={`${gu}${vid['ScreenShotRoute']}`} onClick={setLinkInStorage} onMouseEnter={ninja} onMouseLeave={ninjaVanish} alt="Card image cap" /> */}
                 <LazyLoadImage
@@ -245,8 +244,7 @@ const Home = () => {
             </Col>
           ))}
         </Row>
-      </Container>
-    </Container>
+    </>
   );
 };
 
